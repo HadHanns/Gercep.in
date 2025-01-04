@@ -41,6 +41,10 @@ dependencies:
   dotted_border: ^2.1.0
   file_picker: ^8.1.6
   uuid: ^4.5.1
+  # flutter_pdfview: ^1.4.0
+  # cached_network_image: ^3.4.1
+  http: ^1.2.2
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_test:
