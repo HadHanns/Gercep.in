@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:blog_app/core/utils/calculate_reading_time.dart';
+import 'package:blog_app/core/utils/format_date.dart';
 import 'package:blog_app/features/blog/domain/entities/blog.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path; // Import library path
@@ -47,7 +48,8 @@ class BlogViewerPage extends StatelessWidget {
 
         // Tambahkan UUID untuk menghindari nama file yang sama
         final uuid = Uuid().v4();
-        final uniqueFileName = '${path.basenameWithoutExtension(fileName)}_$uuid${path.extension(fileName)}';
+        final uniqueFileName =
+            '${path.basenameWithoutExtension(fileName)}_$uuid${path.extension(fileName)}';
 
         // Tentukan lokasi penyimpanan
         final directory = await getApplicationDocumentsDirectory();
@@ -81,7 +83,8 @@ class BlogViewerPage extends StatelessWidget {
             children: [
               Text(
                 blog.title,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
               Text(
@@ -93,7 +96,7 @@ class BlogViewerPage extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Text(
-                '${blog.updatedAt} . ${calculateReadingTime(blog.content)} min',
+                '${formatDateAndTime(blog.updatedAt)} . ${calculateReadingTime(blog.content)} min',
                 style: const TextStyle(
                   fontWeight: FontWeight.w500,
                   color: Colors.grey,
@@ -111,13 +114,17 @@ class BlogViewerPage extends StatelessWidget {
                   // Panggil fungsi downloadFile saat tombol ditekan
                   downloadFile(blog.fileOrImageUrl);
                 },
-                child: const Text('Download File-(kalo Exception Download aja)'),
+                child:
+                    const Text('Download File-(kalo Exception Download aja)'),
               ),
               const SizedBox(height: 20),
-              Text(blog.content, style: const TextStyle(
-                fontSize: 16,
-                height: 1.8, 
-              ),),
+              Text(
+                blog.content,
+                style: const TextStyle(
+                  fontSize: 16,
+                  height: 1.8,
+                ),
+              ),
             ],
           ),
         ),
